@@ -15,7 +15,7 @@
 #
 
 find_package(PkgConfig)
-pkg_search_module(ZLIB REQUIRED zlib)
+find_package(ZLIB REQUIRED zlib)
 set(zlib_INCLUDE_DIR ${ZLIB_INCLUDE_DIRS})
 set(ADD_LINK_DIRECTORY ${ADD_LINK_DIRECTORY} ${ZLIB_LIBRARY_DIRS})
 set(ADD_CFLAGS ${ADD_CFLAGS} ${ZLIB_CFLAGS_OTHER})
