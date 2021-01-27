@@ -60,7 +60,7 @@ option(BUILD_SAMPLES "Build TensorRT samples" ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS "-Wno-deprecated-declarations ${CMAKE_CXX_FLAGS} -DBUILD_SYSTEM=cmake_oss")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBUILD_SYSTEM=cmake_oss")
 
 ############################################################################################
 # Cross-compilation settings
@@ -82,7 +82,7 @@ endif()
 
 set(DEFAULT_CUDA_VERSION 11.1)
 set(DEFAULT_CUDNN_VERSION 8.0)
-set(DEFAULT_PROTOBUF_VERSION 3.0.0)
+set(DEFAULT_PROTOBUF_VERSION 3.8.0)
 set(DEFAULT_CUB_VERSION 1.8.0)
 
 # Dependency Version Resolution
@@ -125,7 +125,6 @@ find_library_create_target(nvinfer nvinfer SHARED ${TRT_LIB_DIR})
 find_library_create_target(nvuffparser nvparsers SHARED ${TRT_LIB_DIR})
 
 find_library(CUDART_LIB cudart HINTS ${CUDA_TOOLKIT_ROOT_DIR} PATH_SUFFIXES lib lib64)
-find_library(RT_LIB rt)
 
 set(CUDA_LIBRARIES ${CUDART_LIB})
 
@@ -142,6 +141,7 @@ else()
       61
       70
       75
+      86
     )
 
   string(REGEX MATCH "aarch64" IS_ARM "${TRT_PLATFORM_ID}")
@@ -173,7 +173,7 @@ set(GENCODES "${GENCODES} -gencode arch=compute_${LATEST_SM},code=compute_${LATE
 if (${LATEST_SM} GREATER_EQUAL 70)
     set(BERT_GENCODES "${BERT_GENCODES} -gencode arch=compute_${LATEST_SM},code=compute_${LATEST_SM}")
 endif()
-set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Xcompiler -Wno-deprecated-declarations")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS}")
 
 ############################################################################################
 # TensorRT

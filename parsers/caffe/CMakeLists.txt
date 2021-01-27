@@ -59,10 +59,9 @@ set_target_properties(${SHARED_TARGET}
     LIBRARY_OUTPUT_DIRECTORY "${TRT_OUT_DIR}"
     RUNTIME_OUTPUT_DIRECTORY "${TRT_OUT_DIR}"
 )
-
 target_link_libraries(${SHARED_TARGET}
     ${Protobuf_LIBRARY}
-    nvinfer
+    ${TENSORRT_LIBRARY_INFER}
 )
 
 # modify google namespace to avoid namespace collision.
@@ -80,6 +79,8 @@ set_target_properties(${SHARED_TARGET} PROPERTIES DEBUG_POSTFIX ${TRT_DEBUG_POST
 set_target_properties(${SHARED_TARGET} PROPERTIES VERSION ${TRT_VERSION} SOVERSION ${TRT_SOVERSION} )
 
 set_property(TARGET ${SHARED_TARGET} PROPERTY CUDA_STANDARD 11)
+
+target_compile_definitions(${SHARED_TARGET} PRIVATE NO_STRICT)
 
 ################################## STATIC LIBRARY #######################################
 
@@ -129,6 +130,8 @@ set_target_properties(${STATIC_TARGET} PROPERTIES DEBUG_POSTFIX ${TRT_DEBUG_POST
 set_target_properties(${STATIC_TARGET} PROPERTIES VERSION ${TRT_VERSION} SOVERSION ${TRT_SOVERSION} )
 
 set_property(TARGET ${STATIC_TARGET} PROPERTY CUDA_STANDARD 11)
+
+target_compile_definitions(${STATIC_TARGET} PRIVATE NO_STRICT)
 
 #########################################################################################
 
