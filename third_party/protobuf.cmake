@@ -40,6 +40,7 @@ macro(configure_protobuf VERSION)
             -DCMAKE_CXX_FLAGS=${PROTOBUF_CXXFLAGS}
             -DCMAKE_INSTALL_PREFIX=${Protobuf_INSTALL_DIR}/${Protobuf_TARGET}
             -Dprotobuf_BUILD_TESTS=OFF
+			-Dprotobuf_BUILD_SHARED_LIBS=ON
         SOURCE_SUBDIR cmake
         BINARY_DIR ${Protobuf_INSTALL_DIR}/${Protobuf_TARGET}/src/${Protobuf_TARGET}
     )

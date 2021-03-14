@@ -70,6 +70,8 @@ target_compile_definitions(${SHARED_TARGET}
     PRIVATE
     "-Dgoogle=${GOOGLE}"
     "-DGOOGLE_PROTOBUF_ARCH_64_BIT"
+	"-DPROTOBUF_USE_DLLS"
+	"-DTENSORRT_BUILD_LIB"
 )
 
 set_target_properties(${SHARED_TARGET} PROPERTIES LINK_FLAGS "-Wl,--exclude-libs,ALL")
